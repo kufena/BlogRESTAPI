@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogRESTAPI", "BlogRESTAPI\BlogRESTAPI.csproj", "{278A94F3-006E-4A10-A48B-1427AE8578D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogRESTAPI", "BlogRESTAPI\BlogRESTAPI.csproj", "{278A94F3-006E-4A10-A48B-1427AE8578D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogPostAPITest", "BlogPostAPITest\BlogPostAPITest.csproj", "{6A48D81B-9DAB-4BDF-9416-59FD09CE1483}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{278A94F3-006E-4A10-A48B-1427AE8578D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{278A94F3-006E-4A10-A48B-1427AE8578D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{278A94F3-006E-4A10-A48B-1427AE8578D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A48D81B-9DAB-4BDF-9416-59FD09CE1483}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A48D81B-9DAB-4BDF-9416-59FD09CE1483}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A48D81B-9DAB-4BDF-9416-59FD09CE1483}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A48D81B-9DAB-4BDF-9416-59FD09CE1483}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
