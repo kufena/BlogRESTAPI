@@ -10,22 +10,22 @@ namespace BlogRESTAPI.Models
 
         private string title;
         private int id;
+        private int version;
         private DateTime date;
         private string file;
 
-        public BlogPost(int id, string title, DateTime dt, string fl)
+        public BlogPost(int Id, int Version, string Title, DateTime Date, string File)
         {
-            this.title = title;
-            this.id = id;
-            this.date = dt;
-            this.file = fl;
-
-            var tt = 5.40m;
-            Console.WriteLine("The value is {0}", tt);
+            this.title = Title;
+            this.id = Id;
+            this.date = Date;
+            this.file = File;
+            this.version = Version;
         }
 
         public string Title { get => title; set => title = value; }
         public int Id { get => id; set => id = value; }
+        public int Version { get => version; set => version = value; }
         public DateTime Date { get => date; set => date = value; }
         public string File { get => file; set => file = value; }
 

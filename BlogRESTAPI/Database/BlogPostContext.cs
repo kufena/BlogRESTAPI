@@ -9,7 +9,9 @@ namespace BlogRESTAPI.Database
 {
     public class BlogPostContext : DbContext
     {
+        public BlogPostContext(DbContextOptions options) : base(options)
+        { }
 
-        DbSet<BlogPost> blogPosts;
+        public DbSet<BlogPost> BlogPost { get; set; }
     }
 }

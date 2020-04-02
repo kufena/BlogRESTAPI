@@ -30,6 +30,7 @@ namespace BlogRESTAPI
             services.AddControllers();
 
             services.AddDbContext<BlogPostContext>(options => options.UseMySql(Configuration["ConnectionStrings:BlogPostConnection"]));
+            services.AddScoped<IBlogPostCtxWrapper, BlogPostCtxWrapper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

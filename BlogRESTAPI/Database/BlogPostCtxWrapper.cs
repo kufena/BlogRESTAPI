@@ -21,7 +21,8 @@ namespace BlogRESTAPI.Database
 
         public BlogPost getBlogPost(int id)
         {
-            throw new NotImplementedException();
+            var blogentry = from blog in bpc.BlogPost where blog.Id == id orderby blog.Id, blog.Version select blog;
+            return blogentry.FirstOrDefault<BlogPost>();
         }
     }
 }
