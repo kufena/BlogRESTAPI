@@ -22,7 +22,20 @@ namespace SimpleAPITest
             response.Wait();
             if (response.Result.IsSuccessStatusCode)
             {
-                Console.WriteLine(response.Result.Content.ToString());
+                var newbp = new JsonObject<BlogPost>(response.Result.Content.ReadAsStringAsync().Result);
+                
+                Console.WriteLine("New bp has id " + newbp.Object.Id + " and version " + newbp.Object.Version);
+                bp = newbp.Object;
+                bp.Title += " wee ";
+                bp.Date = DateTime.Now;
+                jo = new JsonObject<BlogPost>(bp);
+                content = new StringContent(jo.ToString(),System.Text.Encoding.UTF8,"application/json");
+                response = http.PutAsync("http://localhost:5000/api/blog", content);
+                response.Wait();
+                if (response.Result.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("We've updated it!");
+                }
             }
 
             Console.ReadLine();

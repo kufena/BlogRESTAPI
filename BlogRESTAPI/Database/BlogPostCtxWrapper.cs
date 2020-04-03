@@ -32,5 +32,19 @@ namespace BlogRESTAPI.Database
             var blogentry = from blog in bpc.BlogPost where blog.Id == id orderby blog.Id, blog.Version select blog;
             return blogentry.FirstOrDefault<BlogPost>();
         }
+
+        public BlogPost updateBlogPost(BlogPost bp)
+        {
+            var maxver = from blog in bpc.BlogPost where blog.Id == bp.Id group blog by blog.Id into g select new { version = g.Max(x => x.Version) };
+            if (maxver.First().version == bp.Version)
+            {
+                bp.Version += 1;
+                bpc.BlogPost.Add(bp);
+                bpc.SaveChanges();
+                return bp;
+            }
+
+            throw new Exception("aaarggh!");
+        }
     }
 }

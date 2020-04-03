@@ -37,5 +37,11 @@ namespace BlogRESTAPI.Controllers
             return bp;
         }
 
+        [HttpPut]
+        public ActionResult<BlogPost> Update(BlogPost put)
+        {
+            return database.updateBlogPost(put);
+        }
+
     }
 }
