@@ -23,14 +23,17 @@ namespace BlogRESTAPI.Controllers
         [HttpPost]
         public ActionResult<BlogPost> Create(BlogPost post)
         {
-            post.Id = 101;
-            return post;
+            return database.createBlogPost(post);
         }
         
         [HttpGet]
         public ActionResult<BlogPost> Get(int id)
         {
             var bp = database.getBlogPost(id);
+            if (bp is null)
+            {
+                return NotFound("No entry with id " + id + " found.");
+            }
             return bp;
         }
 

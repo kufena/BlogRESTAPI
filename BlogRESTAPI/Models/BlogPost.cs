@@ -14,6 +14,9 @@ namespace BlogRESTAPI.Models
         private DateTime date;
         private string file;
 
+        public BlogPost()
+        { }
+
         public BlogPost(int Id, int Version, string Title, DateTime Date, string File)
         {
             this.title = Title;

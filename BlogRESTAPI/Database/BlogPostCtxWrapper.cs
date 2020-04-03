@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogRESTAPI.Database
 {
@@ -16,7 +17,14 @@ namespace BlogRESTAPI.Database
 
         public BlogPost createBlogPost(BlogPost bp)
         {
-            throw new NotImplementedException();
+            // Uses a Blog Ids table to generate unique ids for blog entries.
+            var res = bpc.BlogIds.Add(new BlogId());
+            bpc.SaveChanges();
+            bp.Id = res.CurrentValues.GetValue<int>("Id");
+            bp.Version = 0;
+            bpc.BlogPost.Add(bp);
+            bpc.SaveChanges();
+            return bp;
         }
 
         public BlogPost getBlogPost(int id)
