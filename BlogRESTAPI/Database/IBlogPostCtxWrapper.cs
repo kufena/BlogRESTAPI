@@ -10,6 +10,8 @@ namespace BlogRESTAPI.Database
     {
         BlogPost createBlogPost(BlogPost bp);
         BlogPost getBlogPost(int id);
+        ICollection<BlogPost> getAllBlogTitles();
+
         BlogPost updateBlogPost(BlogPost bp);
     }
 }

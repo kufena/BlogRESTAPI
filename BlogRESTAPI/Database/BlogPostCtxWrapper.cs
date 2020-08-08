@@ -27,6 +27,12 @@ namespace BlogRESTAPI.Database
             return bp;
         }
 
+        public ICollection<BlogPost> getAllBlogTitles()
+        {
+            //var entries = from blog in bpc.BlogPost where blog.Status == true group blog by blog.Id into g select g;
+            return new List<BlogPost>(); //entries.ToList<BlogPost>();
+        }
+
         public BlogPost getBlogPost(int id)
         {
             var blogentry = from blog in bpc.BlogPost where blog.Id == id orderby blog.Id, blog.Version select blog;

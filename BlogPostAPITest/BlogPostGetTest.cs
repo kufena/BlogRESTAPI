@@ -6,17 +6,60 @@ using Moq;
 using BlogRESTAPI.Database;
 using BlogRESTAPI.Controllers;
 using BlogRESTAPI.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Data.Common;
+using Microsoft.Data.Sqlite;
 
 namespace BlogPostAPITest
 {
     public class BlogPostGetTest
     {
+        public BlogPostGetTest()
+        {
+            var ctx = newContext();
+            
+        }
+
+        BlogPostContext newContext()
+        {
+            return new BlogPostContext(new DbContextOptionsBuilder<BlogPostContext>()
+                .UseSqlite(CreateInMemoryDatabase())
+                .Options);
+        }
+
+        private static DbConnection CreateInMemoryDatabase()
+        {
+            var connection = new SqliteConnection("Filename=:memory:");
+
+            connection.Open();
+            var cmd1 = connection.CreateCommand();
+            /*
+             * 
+        public string Title { get => title; set => title = value; }
+        public int Id { get => id; set => id = value; }
+        public int Version { get => version; set => version = value; }
+        public DateTime Date { get => date; set => date = value; }
+        public string File { get => file; set => file = value; }
+        public bool Status { get => status; set => status = value; }
+
+            */
+            cmd1.CommandText = "create table BlogPost (id INTEGER PRIMARY KEY, Title TEXT, Version INTEGER, Date TEXT, File TEXT, Status TEXT)";
+            cmd1.ExecuteNonQuery();
+            var cmd2 = connection.CreateCommand();
+            cmd2.CommandText = "insert into BlogPost (Title,Version,Date,File,Status) values ('Help',1,'2019-01-01','jimbob','live')";
+            cmd2.ExecuteNonQuery();
+            
+            return connection;
+        }
+
+        
+
         [Fact]
         public void TestSimpleReturn()
         {
-            Mock<IBlogPostCtxWrapper> wrapper = new Mock<IBlogPostCtxWrapper>();
-            wrapper.Setup(x => x.getBlogPost(1)).Returns(new BlogRESTAPI.Models.BlogPost(1, 1, "haha", DateTime.Now, "nofile")); //Verify(x => x.getBlogPost(1),)
-            BlogController bpc = new BlogController(wrapper.Object);
+            BlogPostContext ctx = newContext();
+            BlogPostCtxWrapper wrapper = new BlogPostCtxWrapper(ctx);
+            BlogController bpc = new BlogController(wrapper);
             var obj = bpc.Get(1);
             Assert.Equal(1, obj.Value.Id);
             Assert.Equal(1, obj.Value.Version);
@@ -25,10 +68,10 @@ namespace BlogPostAPITest
         [Fact]
         public void TestNullReturn()
         {
-            Mock<IBlogPostCtxWrapper> wrapper = new Mock<IBlogPostCtxWrapper>();
-            wrapper.Setup(x => x.getBlogPost(1)).Returns<BlogPost>(null);
-            BlogController bpc = new BlogController(wrapper.Object);
-            var obj = bpc.Get(1);
+            BlogPostContext ctx = newContext();
+            BlogPostCtxWrapper wrapper = new BlogPostCtxWrapper(ctx);
+            BlogController bpc = new BlogController(wrapper);
+            var obj = bpc.Get(2);
             Assert.Null(obj.Value);
         }
     }

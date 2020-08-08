@@ -11,7 +11,7 @@ namespace SimpleAPITest
     {
         static async Task Main(string[] args)
         {
-            BlogPost bp = new BlogPost(-1, 1, "Here's a new one", DateTime.Now, "nofile");
+            BlogPost bp = new BlogPost(-1, 1, "Here's a new one", DateTime.Now, "nofile", true);
             var jo = new JsonObject<BlogPost>(bp);
             var s = jo.ToString();
             Console.WriteLine(s);
