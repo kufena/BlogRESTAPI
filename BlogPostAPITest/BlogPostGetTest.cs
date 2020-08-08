@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
-using Moq;
 using BlogRESTAPI.Database;
 using BlogRESTAPI.Controllers;
 using BlogRESTAPI.Models;
@@ -16,8 +15,6 @@ namespace BlogPostAPITest
     {
         public BlogPostGetTest()
         {
-            var ctx = newContext();
-            
         }
 
         BlogPostContext newContext()
