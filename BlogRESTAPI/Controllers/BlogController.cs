@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using BlogRESTAPI.Models;
 using BlogRESTAPI.Database;
+using BlogRESTAPI.Utils;
+using BlogRESTAPIModels;
 
 namespace BlogRESTAPI.Controllers
 {
@@ -21,9 +23,12 @@ namespace BlogRESTAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult<BlogPost> Create(BlogPost post)
+        public ActionResult<BlogId> Create(BlogPost post)
         {
-            return database.createBlogPost(post);
+            DBBlogPost dbpost = DBToAPIModelTransforms.APItoDBBlogPost(post);
+            DBBlogPost creation = database.createBlogPost(dbpost);
+            BlogId newid = new BlogId(creation.Id, "/blogs/" + creation.Id);
+            return newid;
         }
         
         [HttpGet]
@@ -34,13 +39,13 @@ namespace BlogRESTAPI.Controllers
             {
                 return NotFound("No entry with id " + id + " found.");
             }
-            return bp;
+            return DBToAPIModelTransforms.DBtoAPIBlogPost(bp);
         }
 
         [HttpPut]
-        public ActionResult<BlogPost> Update(BlogPost put)
+        public ActionResult<BlogPost> Update(int id, BlogPost put)
         {
-            return database.updateBlogPost(put);
+            return DBToAPIModelTransforms.DBtoAPIBlogPost(database.updateBlogPost(DBToAPIModelTransforms.APItoDBBlogPost(id,put)));
         }
 
     }

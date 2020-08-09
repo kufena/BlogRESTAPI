@@ -58,7 +58,7 @@ namespace BlogPostAPITest
             BlogPostCtxWrapper wrapper = new BlogPostCtxWrapper(ctx);
             BlogController bpc = new BlogController(wrapper);
             var obj = bpc.Get(1);
-            Assert.Equal(1, obj.Value.Id);
+            Assert.Equal("Help", obj.Value.Title);
             Assert.Equal(1, obj.Value.Version);
         }
 

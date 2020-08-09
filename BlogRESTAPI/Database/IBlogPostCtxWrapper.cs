@@ -8,10 +8,10 @@ namespace BlogRESTAPI.Database
 {
     public interface IBlogPostCtxWrapper
     {
-        BlogPost createBlogPost(BlogPost bp);
-        BlogPost getBlogPost(int id);
-        ICollection<BlogPost> getAllBlogTitles();
+        DBBlogPost createBlogPost(DBBlogPost bp);
+        DBBlogPost getBlogPost(int id);
+        ICollection<DBBlogPost> getAllBlogTitles();
 
-        BlogPost updateBlogPost(BlogPost bp);
+        DBBlogPost updateBlogPost(DBBlogPost bp);
     }
 }

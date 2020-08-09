@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Http.Connections;
 using BlogRESTAPI.Models;
+using BlogRESTAPIModels;
 
 namespace SimpleAPITest
 {
@@ -11,7 +12,7 @@ namespace SimpleAPITest
     {
         static async Task Main(string[] args)
         {
-            BlogPost bp = new BlogPost(-1, 1, "Here's a new one", DateTime.Now, "nofile", true);
+            BlogPost bp = new BlogPost(1, "Here's a new one", DateTime.Now, "nofile", true);
             var jo = new JsonObject<BlogPost>(bp);
             var s = jo.ToString();
             Console.WriteLine(s);
@@ -22,9 +23,9 @@ namespace SimpleAPITest
             response.Wait();
             if (response.Result.IsSuccessStatusCode)
             {
-                var newbp = new JsonObject<BlogPost>(response.Result.Content.ReadAsStringAsync().Result);
-                
-                Console.WriteLine("New bp has id " + newbp.Object.Id + " and version " + newbp.Object.Version);
+                BlogId newbpid = new JsonObject<BlogId>(response.Result.Content.ReadAsStringAsync().Result).Object; ;
+                Console.WriteLine("New bp has id " + newbpid.Id);
+                /*
                 bp = newbp.Object;
                 bp.Title += " wee ";
                 bp.Date = DateTime.Now;
@@ -36,6 +37,7 @@ namespace SimpleAPITest
                 {
                     Console.WriteLine("We've updated it!");
                 }
+                */
             }
 
             Console.ReadLine();

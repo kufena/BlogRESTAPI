@@ -15,31 +15,31 @@ namespace BlogRESTAPI.Database
             this.bpc = ctx;
         }
 
-        public BlogPost createBlogPost(BlogPost bp)
+        public DBBlogPost createBlogPost(DBBlogPost bp)
         {
             // Uses a Blog Ids table to generate unique ids for blog entries.
-            var res = bpc.BlogIds.Add(new BlogId());
+            //var res = bpc.BlogIds.Add(new BlogId());
+            //bpc.SaveChanges();
+            bp.Version = 0;
+            var res = bpc.BlogPost.Add(bp);
             bpc.SaveChanges();
             bp.Id = res.CurrentValues.GetValue<int>("Id");
-            bp.Version = 0;
-            bpc.BlogPost.Add(bp);
-            bpc.SaveChanges();
             return bp;
         }
 
-        public ICollection<BlogPost> getAllBlogTitles()
+        public ICollection<DBBlogPost> getAllBlogTitles()
         {
             //var entries = from blog in bpc.BlogPost where blog.Status == true group blog by blog.Id into g select g;
-            return new List<BlogPost>(); //entries.ToList<BlogPost>();
+            return new List<DBBlogPost>(); //entries.ToList<BlogPost>();
         }
 
-        public BlogPost getBlogPost(int id)
+        public DBBlogPost getBlogPost(int id)
         {
             var blogentry = from blog in bpc.BlogPost where blog.Id == id orderby blog.Id, blog.Version select blog;
-            return blogentry.FirstOrDefault<BlogPost>();
+            return blogentry.FirstOrDefault<DBBlogPost>();
         }
 
-        public BlogPost updateBlogPost(BlogPost bp)
+        public DBBlogPost updateBlogPost(DBBlogPost bp)
         {
             var maxver = from blog in bpc.BlogPost where blog.Id == bp.Id group blog by blog.Id into g select new { version = g.Max(x => x.Version) };
             if (maxver.First().version == bp.Version)

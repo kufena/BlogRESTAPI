@@ -15,11 +15,11 @@ namespace BlogRESTAPI.Database
         /**
          * A table of blog posts, keyed on Id and Version.
          */
-        public DbSet<BlogPost> BlogPost { get; set; }
+        public DbSet<DBBlogPost> BlogPost { get; set; }
 
         /**
          * A table used to auto generate blog ids.  Used for creation only.
          */
-        public DbSet<BlogId> BlogIds { get; set; }
+        //public DbSet<BlogId> BlogIds { get; set; }
     }
 }

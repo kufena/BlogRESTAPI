@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BlogRESTAPI.Models
 {
-    public class BlogPost
+    public class DBBlogPost
     {
 
         private string title;
@@ -15,10 +15,10 @@ namespace BlogRESTAPI.Models
         private string file;
         private bool status;
 
-        public BlogPost()
+        public DBBlogPost()
         { }
 
-        public BlogPost(int Id, int Version, string Title, DateTime Date, string File, bool Status)
+        public DBBlogPost(int Id, int Version, string Title, DateTime Date, string File, bool Status)
         {
             this.title = Title;
             this.id = Id;
