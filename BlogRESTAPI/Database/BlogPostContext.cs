@@ -20,6 +20,6 @@ namespace BlogRESTAPI.Database
         /**
          * A table used to auto generate blog ids.  Used for creation only.
          */
-        //public DbSet<BlogId> BlogIds { get; set; }
+        public DbSet<DBBlogId> BlogIds { get; set; }
     }
 }

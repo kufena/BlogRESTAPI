@@ -18,12 +18,11 @@ namespace BlogRESTAPI.Database
         public DBBlogPost createBlogPost(DBBlogPost bp)
         {
             // Uses a Blog Ids table to generate unique ids for blog entries.
-            //var res = bpc.BlogIds.Add(new BlogId());
-            //bpc.SaveChanges();
-            bp.Version = 0;
-            var res = bpc.BlogPost.Add(bp);
+            var res = bpc.BlogIds.Add(new DBBlogId());
             bpc.SaveChanges();
+            bp.Version = 0;
             bp.Id = res.CurrentValues.GetValue<int>("Id");
+            bpc.SaveChanges();
             return bp;
         }
 
@@ -45,7 +44,7 @@ namespace BlogRESTAPI.Database
             if (maxver.First().version == bp.Version)
             {
                 bp.Version += 1;
-                bpc.BlogPost.Add(bp);
+                bpc.BlogPost.Update(bp); //.Add(bp);
                 bpc.SaveChanges();
                 return bp;
             }

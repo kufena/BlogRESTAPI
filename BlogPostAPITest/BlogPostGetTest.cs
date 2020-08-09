@@ -43,7 +43,7 @@ namespace BlogPostAPITest
             cmd1.CommandText = "create table BlogPost (id INTEGER PRIMARY KEY, Title TEXT, Version INTEGER, Date TEXT, File TEXT, Status TEXT)";
             cmd1.ExecuteNonQuery();
             var cmd2 = connection.CreateCommand();
-            cmd2.CommandText = "insert into BlogPost (Title,Version,Date,File,Status) values ('Help',1,'2019-01-01','jimbob','live')";
+            cmd2.CommandText = "insert into BlogPost (Id,Title,Version,Date,File,Status) values (1,'Help',1,'2019-01-01','jimbob','live')";
             cmd2.ExecuteNonQuery();
             
             return connection;
